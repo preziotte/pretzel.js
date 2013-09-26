@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link type="text/css" href="css/style.css" rel="stylesheet"/>
+		<title>Pretzel.js</title>
+	</head>
+
+	<body>
+
+		<div id="content">
+			<img id='sync' src='img/sync.png' />
+		</div>
+
+		<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+		<script type="text/javascript" src="js/underscore-min.js"></script>
+		<script type="text/javascript" src="js/xdate.js"></script>
+		<script type="text/javascript" src="js/list.js"></script>
+
+		<script type="text/javascript" src="module/helper.js"></script>
+		<script type="text/javascript" src="module/model.js"></script>
+		<script type="text/javascript" src="module/build.js"></script>
+		<script type="text/javascript" src="module/controller.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				Controller.init();
+			});
+		</script>
+	</body>
+</html>

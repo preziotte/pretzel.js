@@ -1,0 +1,17 @@
+body {
+	font-family: 'Helvetica Neue', "Helvetiva";
+}
+
+.spinner {
+    -webkit-animation: rotation 1.5s infinite linear;
+	width: 24px; 
+}
+
+@-webkit-keyframes rotation {
+	from {-webkit-transform: rotate(0deg);}
+	to   {-webkit-transform: rotate(359deg);}
+}
+
+.hide {
+	display: none;
+}
