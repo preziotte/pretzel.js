@@ -10,10 +10,10 @@
 	var b = {};
 
 	// each non-static page gets its own method
-	b.content = function() {
+	b.contentList = function() {
 		console.log("b.contentList fired");
 
-		var listObj = Model.get('contacts');
+		var listObj = Model.get('content');
 
 	 	// custom compare function for sorting objs
 		function compare(a,b) {
@@ -51,7 +51,11 @@
 		});
 
 	};
+	b.contentPage = function(id) {
+		var obj = Model.get('content', id);
 	
+	}
+
 	// helper methods
 	b._entry = function(obj) {
 

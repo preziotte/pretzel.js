@@ -14,7 +14,7 @@ var exports = this;  // use global context rather than window object
 
 		console.log("c.init fired");
 
-		// global stuff
+		// global variables
 		var g = {
 			API_URL : "http://myapidomain.com/api/",
 			platform: "WebApp",
@@ -25,7 +25,7 @@ var exports = this;  // use global context rather than window object
 			pendingAPI : 0
 		};
 
-		// dat state
+		// state
 		var s = {
 			active : null,		// string of visible page
 			back : null			// the last visible page
@@ -36,7 +36,7 @@ var exports = this;  // use global context rather than window object
 		exports.State = s;
 
 		c.bind();
-		c.go(window.location.pathname);
+		Route.go(window.location.pathname);
 
 	};
 	c.bind = function() {
@@ -52,39 +52,6 @@ var exports = this;  // use global context rather than window object
 		$('#contactList').on(click, 'li.link', c.cList);
 		$('#contactGo').on(click, c.cGo);
 		$('#deleteCGo').on(click, c.cGoDeleteRly);
-	};
-
-	// routing
-	c.go = function(page, id) {
-
-		console.log("c.go fired ("+page+")");
-		
-		// trim the fat
-		page = $.trim(page).replace('#','').replace(/^\/|\/$/g, '');
-
-		// update state
-		State.back = State.active;
-		State.active = page;
-
-		switch(page) {
-			case 'about':
-				c.show('about');
-				break;
-			case 'index.html': case 'home':
-				c.show('content');
-				Build.content();
-				break;
-			default:
-				c.show('content');
-				Build.content();
-				break;
-		}
-
-	};
-	c.show = function(page) {
-		console.log("c.show fired ("+page+")");
-
-		$('#'+page).addClass('show');
 	};
 
 	// eventListener callbacks

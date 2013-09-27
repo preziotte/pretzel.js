@@ -1,10 +1,22 @@
 body {
-	font-family: 'Helvetica Neue', "Helvetiva";
+	font-family: 'Helvetica Neue', 'Helvetiva';
+}
+
+.page {
+	opacity: 0;
+	display: none;
+	-webkit-transition: opacity .4s ease-in-out;
+			transition: opacity .4s ease-in-out;
+}
+
+.active {
+	opacity: 1;
+	display: block;
 }
 
 .spinner {
     -webkit-animation: rotation 1.5s infinite linear;
-	width: 24px; 
+	width: 36px; 
 }
 
 @-webkit-keyframes rotation {

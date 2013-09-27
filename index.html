@@ -7,8 +7,11 @@
 
 	<body>
 
-		<div id="content">
-			<img id='sync' src='img/sync.png' />
+		<div id="pageContainer">
+			<img id='sync' class='spinner' src='img/sync.png' />
+			<div class='page' id='contentList'></div>
+			<div class='page' id='contentPage'></div>
+			<div class='page' id='about'></div>
 		</div>
 
 		<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
@@ -19,6 +22,7 @@
 		<script type="text/javascript" src="module/helper.js"></script>
 		<script type="text/javascript" src="module/model.js"></script>
 		<script type="text/javascript" src="module/build.js"></script>
+		<script type="text/javascript" src="module/route.js"></script>
 		<script type="text/javascript" src="module/controller.js"></script>
 
 		<script>
