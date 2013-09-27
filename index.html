@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link type="text/css" href="css/bootstrap.css" rel="stylesheet"/>
 		<link type="text/css" href="css/style.css" rel="stylesheet"/>
 		<title>Pretzel.js</title>
 	</head>
 
 	<body>
 
-		<div id='navBar'>
-			<button id='aboutBtn' data-go='about'>About</button>
-			<button id='entryBtn' data-go='contentList'>Entries</button>
+		<div id='navBar' class='navbar navbar-default'>
+			<div class='navbar-header navbar-brand'>Pretzel.js</div>
+			<div class='navbar-collapse collapse'>
+				<div id='loading' style='float: right;'><img id='sync' class='spinner' src='img/sync.png' /></div>
+				<button class="btn btn-info btn-sm" id='aboutBtn' data-go='about'>About</button>
+				<button class="btn btn-primary btn-sm" id='entryBtn' data-go='contentList'>Entries</button>
+			</div>
 		</div>
 
 		<div id='pageContainer'>
-			<div id='loading' style='float: right;'><img id='sync' class='spinner' src='img/sync.png' /></div>
-			<div class='page' id='contentList'></div>
+			<div class='page list-group' id='contentList'></div>
 			<div class='page' id='contentPage'></div>
 			<div class='page' id='about'>Static Ass About Page</div>
 		</div>

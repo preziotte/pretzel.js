@@ -61,11 +61,11 @@
 	// helper methods
 	b._listUnit = function(obj) {
 
-		var HTML = "<li data-go='contentPage' data-id='"+obj.id+"' class='listEntry'>"+
+		var HTML = "<a href='#' data-go='contentPage' data-id='"+obj.id+"' class='list-group-item'>"+
 						obj.title + "<br />"+
 						"<strong class='name'>written by "+obj.author+" on "+obj.date+"</strong>"+
 						"<br />"+ obj.body +
-					"</li>";
+					"</a>";
 
 		return HTML;
 	};

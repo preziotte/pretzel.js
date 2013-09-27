@@ -66,7 +66,7 @@ var exports = this;  // use global context rather than window object
 
 		var click = (Helper.isMobile()) ? 'touchstart' : 'click';
 
-		$('#contentList').on(click, 'li', c.entryGo);
+		$('#contentList').on(click, 'a', c.entryGo);
 		$('#aboutBtn').on(click, c.btnGo);
 		$('#entryBtn').on(click, c.btnGo);
 	};

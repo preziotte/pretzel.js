@@ -2,7 +2,13 @@ body {
 	font-family: 'Helvetica Neue', 'Helvetiva';
 }
 
+.navbar-collapse {
+	padding-top: 10px;
+}
+
 .page {
+	margin: 10px;
+	padding: 10px;
 	opacity: 0;
 	display: none;
 	-webkit-transition: opacity .4s ease-in-out;
@@ -16,7 +22,8 @@ body {
 
 .spinner {
     -webkit-animation: rotation 1.5s infinite linear;
-	width: 36px; 
+    opacity: 0.4;
+	width: 30px; 
 }
 
 @-webkit-keyframes rotation {
