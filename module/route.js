@@ -23,7 +23,7 @@
 
 		switch(page) {
 			case 'index.html': case 'contentList':
-				r.show('content');
+				r.show('contentList');
 				Build.contentList();
 				break;
 			case 'contentPage':
@@ -34,8 +34,8 @@
 				r.show('about');
 				break;
 			default:
-				r.show('content');
-				Build.content();
+				r.show('contentList');
+				Build.contentList();
 				break;
 		};
 

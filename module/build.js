@@ -12,8 +12,8 @@
 	b.contentList = function() {
 		console.log("b.contentList fired");
 
-		var listObj = Model.get('content');
-
+		var listObj = Model.getLocal('entries');
+		
 	 	// custom compare function for sorting objs
 		function compare(a,b) {
 		  if (a.date < b.date)
@@ -25,7 +25,7 @@
 		
 		listObj.sort(compare);
 
-		if (contactsList.length < 1) {
+		if (listObj.length < 1) {
 			return false;
 		}
 		else {
@@ -34,21 +34,20 @@
 
 		var listHTML = "";
 		for (var i = 0; i < listObj.length; i++) {
-			listHTML += b._list(listObj[i]);
+			listHTML += b._listUnit(listObj[i]);
 		}
 
-		$("#content").append(cHTML);
+		$("#contentList").append(listHTML);
 		
-		
+/*		
 		var listjs = new List('content', {valueNames: [ 'first', 'last', 'apptc' ]});
-
 		listjs.on('updated', function() {
 			if (listjs.searched && listjs.visibleItems.length == 0) {
 			}
 			else {
 			}
 		});
-
+*/
 	};
 	b.contentPage = function(id) {
 		var obj = Model.get('content', id);
@@ -56,22 +55,14 @@
 	}
 
 	// helper methods
-	b._entry = function(obj) {
+	b._listUnit = function(obj) {
 
-		var id = obj['id'] || null;
-		var fF = $.trim(obj['firstName']) || ' ';
-		var fL = $.trim(obj['lastName']) || ' ';
-		var fE = $.trim(obj['email']) || ' ';
-		var fP = Helper.formatPhone($.trim(obj['phone'])) || ' ';
-
-		// build <li> html
-		var HTML = "<li data-go='' data-id='"+id+"' class='listEntry>"+
+		var HTML = "<li data-go='' data-id='"+obj.id+"' class='listEntry>"+
 					"<a>"+
-						"<strong class='name'><span class='first'>"+fF+"</span> <span class='last'>"+fL+"</span></strong>"+
+						"<strong class='name'><span class='first'>written by "+obj.author+" on "+obj.date+"</span></strong>"+
 						"<span class='chevron'></span>"+
-						"<br />"+
-						"<span class='details phone'>"+fP+"</span>"+
-						"<span class='details email' style='margin-left: 10px;'>"+fE+"</span>"+
+						"<br />"+ obj.title +
+						"<br />"+ obj.body +
 					"</a>"+
 				"</li>";
 
