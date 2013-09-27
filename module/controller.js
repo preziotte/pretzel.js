@@ -64,92 +64,21 @@ var exports = this;  // use global context rather than window object
 	c.bind = function() {
 		console.log("c.bind fired");
 
-		var click = (Helper.isMobile()) ? 'click' : 'touchstart';
+		var click = (Helper.isMobile()) ? 'touchstart' : 'click';
 
-		$('#contactList').on(click, 'li.link', c.cList);
-		$('#contactGo').on(click, c.cGo);
-		$('#deleteCGo').on(click, c.cGoDeleteRly);
+		$('#contentList').on(click, 'li', c.entryGo);
+		$('#aboutBtn').on(click, c.btnGo);
+		$('#entryBtn').on(click, c.btnGo);
 	};
 
 	// eventlistener callbacks
-	c.cList = function() {
-		var $this = $(this);
-		$this.addClass('active');
-
-		if (State.pendingAppt) {
-			State.pendingAppt.contacts.push($this.attr('data-id'));
-			Helper.prettyLog(State.pendingAppt);
-		}
-
-		if (State.pendingAppt && State.pendingApptEdit)
-			Route.go('appointmentsEdit', $this.attr('data-transition'), State.pendingApptEdit);
-		else if (State.pendingAppt && !State.pendingApptEdit)
-			Route.go('appointmentsAdd', $this.attr('data-transition'));
-		else
-			Route.go('contactsEdit', $this.attr('data-transition'), $this.attr('data-id'));
-
+	c.btnGo = function() {
+		console.log('c.btnGo fired');
+		Route.go($(this).attr('data-go'));
 	};
-	c.cGo = function() {
-	
-		var $form = $('#addContactForm');
-		var errorFlag = true;
-		var editFlag = ($(this).text() == 'Add') ? false : true;
-
-		$form.find('input').each(function(){
-			if ($(this).val() != '') errorFlag = false;
-		});
-
-		if (errorFlag) {
-			Helper.alert("To add a contact, fill in some of the information above.", "Error", "Dismiss");
-			return false;
-		}
-		
-		// build contact object
-		var c = {
-			"user" : 				Global.userid,
-			"firstName": 			$form.find('input[name=first]').val(),
-			"lastName": 			$form.find('input[name=last]').val(),
-			"phone": 				Helper.stripAlphaChars($form.find('input[name=phone]').val()),
-			"email": 				$form.find('input[name=email]').val(),
-			"modified": 			Helper.nowStamp()
-		};
-		
-		if (!editFlag) {
-			c.id = Helper.uid();
-			var w = "Added.";
-			
-			// 	check client limit
-			var pass = Model.clientLimitCheck();
-			if (!pass) {
-				ga_storage._trackEvent('Client Limit Reached');
-				Helper.alert("You've reached your client limit, please upgrade your account.", "Upgrade", ['View Plans','Go Back'], Controller._upgrade);
-				return false;
-			}
-		}
-		else {
-			c.id = $(this).attr('data-id');
-			var w = "Edited.";
-		}
-
-		console.log(c);
-
-		var saved = Model.set('c',c);
-
-		saved.then(function(data) {
-			console.log('cGo:then');
-			//Helper.prettyLog(data);
-
-			if (data.error) {
-				Helper.alert(data.error, "Error", "Dismiss");
-			}
-			else {
-				Helper.alert("Contact "+ w, "Success", "Dismiss", Controller._dismiss);
-			}
-
-		});
-	};
-	c.cGoDeleteRly = function() {
-		Helper.alert("", "Delete Contact?", ['Yes','No'], c.cGoDelete);
+	c.entryGo = function() {
+		console.log('c.entryGo fired');
+		Route.go($(this).attr('data-go'),$(this).attr('data-id'));
 	};
 	
 	exports.Controller = c;

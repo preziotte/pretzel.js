@@ -37,6 +37,7 @@
 			listHTML += b._listUnit(listObj[i]);
 		}
 
+		$("#contentList").empty();
 		$("#contentList").append(listHTML);
 		
 /*		
@@ -50,21 +51,21 @@
 */
 	};
 	b.contentPage = function(id) {
-		var obj = Model.get('content', id);
+		var obj = Model.getLocal('entries', id);
+		
+		var HTML = b._listUnit(obj);
+		$('#contentPage').html(HTML);
 	
 	}
 
 	// helper methods
 	b._listUnit = function(obj) {
 
-		var HTML = "<li data-go='' data-id='"+obj.id+"' class='listEntry>"+
-					"<a>"+
-						"<strong class='name'><span class='first'>written by "+obj.author+" on "+obj.date+"</span></strong>"+
-						"<span class='chevron'></span>"+
-						"<br />"+ obj.title +
+		var HTML = "<li data-go='contentPage' data-id='"+obj.id+"' class='listEntry'>"+
+						obj.title + "<br />"+
+						"<strong class='name'>written by "+obj.author+" on "+obj.date+"</strong>"+
 						"<br />"+ obj.body +
-					"</a>"+
-				"</li>";
+					"</li>";
 
 		return HTML;
 	};

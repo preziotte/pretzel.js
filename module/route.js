@@ -27,8 +27,8 @@
 				Build.contentList();
 				break;
 			case 'contentPage':
-				r.show('content');
-				Build.contentPage();
+				r.show('contentPage');
+				Build.contentPage(id);
 				break;
 			case 'about':
 				r.show('about');

@@ -7,11 +7,16 @@
 
 	<body>
 
-		<div id="pageContainer">
-			<img id='sync' class='spinner' src='img/sync.png' />
+		<div id='navBar'>
+			<button id='aboutBtn' data-go='about'>About</button>
+			<button id='entryBtn' data-go='contentList'>Entries</button>
+		</div>
+
+		<div id='pageContainer'>
+			<div id='loading' style='float: right;'><img id='sync' class='spinner' src='img/sync.png' /></div>
 			<div class='page' id='contentList'></div>
 			<div class='page' id='contentPage'></div>
-			<div class='page' id='about'></div>
+			<div class='page' id='about'>Static Ass About Page</div>
 		</div>
 
 		<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>

@@ -65,14 +65,14 @@
 
 		// rotates syncing img until no ajax requests are pending
 
-		$("#sync").fadeIn('fast');
+		$("#sync").show();
 
 		var refreshIntervalId = setInterval(function(){
 			if (Global.pendingAPI <= 0 && $.active <= 0) {
 				$("#sync").fadeOut('fast');
 				clearInterval(refreshIntervalId);
 			}
-		},500);
+		},250);
 
 	};
 
