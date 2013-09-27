@@ -1,5 +1,4 @@
-
-/////////////////////// v2.0.0
+/////////////////////// v1.0.0
 // module/helper.js
 ///////////////////////
 
@@ -27,52 +26,6 @@
 			text += possible.charAt(Math.floor(Math.random() * possible.length));
 		return text;
 	};
-	h.syncCheck = function(force) {
-
-		console.log("h.syncCheck fired");
-		// rotates syncing img until no ajax requests are pending
-
-		if (!Global.userid && !force) return false;
-
-		if (Global.isIOS) {
-			if ($('.spinner').length <= 0)
-				$("#toggle-left").after("<img class='spinner' src='img/sync.png' style='position: relative; left: -2px; top: -12px;' />");
-	
-			if ($('.spinner').length <= 0)
-				$("#headerLeft").after("<img class='spinner' src='img/sync.png' />");
-
-			var refreshIntervalId = setInterval(function(){
-				if (Global.pendingAPI <= 0 && $.active <= 0) {
-					$(".spinner").remove();
-					clearInterval(refreshIntervalId);
-				}
-			},500);
-		}
-		else {
-			$("#imgsync").fadeIn('fast');
-
-			function closeEditorWarning(){
-			    return "Appointment Keeper is still in the middle of syncing the changes you've made.  If you leave now, you will lose any unsaved changes.";
-			}
-			
-			window.onbeforeunload = closeEditorWarning;
-			
-			var refreshIntervalId = setInterval(function(){
-				if (Global.pendingAPI <= 0 && $.active <= 0) {
-					$("#imgsync").fadeOut('fast');
-					window.onbeforeunload = null;
-					clearInterval(refreshIntervalId);
-				}
-			},500);
-		}
-	};
-	h.shakeShake = function(elem) {
-		// 
-		var l = 15;  
-		for( var i = 0; i < 4; i++ )
-			$(elem).animate( { 'margin-left': "+=" + ( l = -l ) + 'px' }, 80);
-	};
-
 	h.getCookie = function(c_name) {
 		//console.log("h.getCookie fired");
 		var i,x,y,ARRcookies=document.cookie.split(";");
@@ -92,7 +45,6 @@
 		var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
 		document.cookie=c_name + "=" + c_value;
 	};
-
 	h.prettyLog = function(data) {
 		console.log("h.prettyLog fired");
 		return false;
@@ -107,37 +59,25 @@
 		console.log('\n'+JSON.stringify(JSON.parse(x),null, 4));
 
 	};
+	h.syncCheck = function(force) {
 
-	h._throttle = function(func, wait, options) {
-		var context, args, result;
-		var timeout = null;
-		var previous = 0;
-		options || (options = {});
-		var later = function() {
-		  previous = options.leading === false ? 0 : new Date;
-		  timeout = null;
-		  result = func.apply(context, args);
-		};
-		return function() {
-		  var now = new Date;
-		  if (!previous && options.leading === false) previous = now;
-		  var remaining = wait - (now - previous);
-		  context = this;
-		  args = arguments;
-		  if (remaining <= 0) {
-		    clearTimeout(timeout);
-		    timeout = null;
-		    previous = now;
-		    result = func.apply(context, args);
-		  } else if (!timeout && options.trailing !== false) {
-		    timeout = setTimeout(later, remaining);
-		  }
-		  return result;
-		};
+		console.log("h.syncCheck fired");
+
+		// rotates syncing img until no ajax requests are pending
+
+		$("#sync").fadeIn('fast');
+
+		var refreshIntervalId = setInterval(function(){
+			if (Global.pendingAPI <= 0 && $.active <= 0) {
+				$("#sync").fadeOut('fast');
+				clearInterval(refreshIntervalId);
+			}
+		},500);
+
 	};
 
 	JSON.tryParse = function(string) {
-		// wrapper for JSON.parse that wont throw an error
+		// wrapper for JSON.parse that wont throw an error if it fails!
 		try { return JSON.parse(string); }
 		catch(err) { return string; }
 	};

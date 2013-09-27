@@ -46,6 +46,11 @@
 		$('#'+page).addClass('active');
 	};
 
+	exports.onpopstate = function(event) {
+		if (event.state != null) {
+			r.go(event.state.page, "back");
+		}
+	};
 
 	// expose yourself
 	exports.Route = r;

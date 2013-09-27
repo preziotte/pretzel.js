@@ -14,47 +14,43 @@ var exports = this;  // use global context rather than window object
 
 		console.log("c.init fired");
 
-		// global variables
+		// your global variables
 		var g = {
 			API_URL : "http://myapidomain.com/api/",
 			platform: "WebApp",
 			clientVersion : "0.1",
-			debugMode: 	(window.location.href.indexOf('?debug') != -1) ? true: false,
+			debugMode: 	(window.location.href.indexOf('?debug') != -1) ? true : false,
 			sessionid : Helper.uniqueid(),
 			userid : null,
 			pendingAPI : 0
 		};
-
-		// state
-		var s = {
-			active : null,		// string of visible page
-			back : null			// the last visible page
-		};
-		
-		// expose yourself
 		exports.Global = g;
+
+		// save state
+		var s = {
+			active : null,		// the name of the visible page
+			back : null			// the last page the user was on
+		};
 		exports.State = s;
 
+		// bind all eventlisteners
 		c.bind();
+		
+		// render and display page
 		Route.go(window.location.pathname);
 
 	};
 	c.bind = function() {
-
 		console.log("c.bind fired");
 
 		var click = (Helper.isMobile()) ? 'click' : 'touchstart';
-
-		$('#greetings').on(click, c.navGo);
-		$('#headerRight, #headerLeft').on(click, c.headerGo);
-		$('#referralCode').on(click, c.referralCode);
 
 		$('#contactList').on(click, 'li.link', c.cList);
 		$('#contactGo').on(click, c.cGo);
 		$('#deleteCGo').on(click, c.cGoDeleteRly);
 	};
 
-	// eventListener callbacks
+	// eventlistener callbacks
 	c.cList = function() {
 		var $this = $(this);
 		$this.addClass('active');
@@ -134,46 +130,7 @@ var exports = this;  // use global context rather than window object
 	c.cGoDeleteRly = function() {
 		Helper.alert("", "Delete Contact?", ['Yes','No'], c.cGoDelete);
 	};
-	c.cGoDelete = function(i) {
-		
-		if (i != 1) { return; }
-		console.log('cGoDelete fired');
-
-		var $this = $('#deleteCGo');
-
-		var cMap = Model.contactMap();
-		if (cMap[$this.attr('data-id')] && cMap[$this.attr('data-id')].length > 0) {
-			Helper.alert("Sorry, you cannot delete a contact that has an appointment.", "Error", "Dismiss");
-			return false;
-		}
-
-		var saved = Model.set('c',$this.attr('data-id'));
-
-		saved.then(function(data) {
-
-			if (data.error) {
-				Helper.alert(data.error, "Error", "Dismiss");
-			}
-			else {
-				Helper.alert("Contact Deleted", "Success", "Dismiss", Controller._dismiss);
-			}
-
-		});
-
-	};
-	c.contactToAppt = function() {
-		var $this = $(this);
-		$this.addClass('active');
-
-		if ($this.attr('id') == 'bookApptContact') {
-			State.pendingAppt = { contacts: [$this.attr('data-id')] };
-			Route.go('appointmentsAdd', $this.attr('data-transition'));
-		}
-		else
-			Route.go('appointmentsEdit', $this.attr('data-transition'), $this.attr('data-id'));
-	};
 	
-	// expose yourself
 	exports.Controller = c;
 
 })();
