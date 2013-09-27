@@ -40,8 +40,13 @@
 		};
 
 	};
-	r.show = function(page) {
+	r.show = function(page, back) {
 		console.log("r.show fired ("+page+")");
+
+		if (back == null && page != window.location.pathname.substring(1)) {
+			//history.pushState({page:page},"Pretzel.js",page);
+		}
+
 		$('#pageContainer div.active').removeClass('active');
 		$('#'+page).addClass('active');
 	};
