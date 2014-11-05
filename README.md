@@ -6,9 +6,7 @@ A hollow, transparent shell of a Javascript application.  A non-framework.  Bare
 
 A litle context.
 -------------
-Full-blown Javascript applications are super popular now and there are many hyper-oppinionated people who believe they know the right way build one.  There are also an absurd number of tools to make this possible now.  I've found it overwhelming.  And paralyzing.  In my experience, these frameworks require an intense investment of time to wrap your head around.  I really dont think most people need 90% of what they have to offer.  Especially when you're just starting out.  I think it's important to have your head wrapped around your own project.  Not to feel like a cog in your own machine.  I read about Backbone.  I looked into Ember and Angular.  They all terrified me.  They felt so verbose.  I ended up making this instead.
-
-Pretzel.js tries to get rid of the overhead of making a web app without adding any of its own.  Its *aware* of what MVC is, but it didn't pay attention very well.  It just wants to add a little structure and coherance to your life.  Prevent your app from getting too convoluted and messy when its more than a few hundred lines.  It's a place to start.
+Full-blown js mvc frameworks can have a pretty big learning curve.  They also add a big black box to your application, which I'm not always comfortable with.  I made this as an alternative for my own projects.  It's more of a boilderplate -- a way to make sure you cover certain bases.
 
 How to use it.
 -------------
