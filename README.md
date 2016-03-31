@@ -1,4 +1,4 @@
-Pretzel.js - Tiny JS Boilderplate.
+Pretzel.js - Tiny JS Boilerplate.
 
 
 ####A litle context.
